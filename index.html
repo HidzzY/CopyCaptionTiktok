@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kisodown - TikTok Caption Downloader</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            orange: '#ff5722',
+                            pink: '#fe2c55',
+                            cyan: '#25f4ee',
+                            dark: '#0a0d14',
+                            card: '#121723',
+                            border: '#1f293d'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Font & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-[#080b11] text-slate-200 font-['Plus_Jakarta_Sans',sans-serif] min-h-screen relative overflow-x-hidden grid-bg">
+
+    <!-- Glowing Background Blur -->
+    <div class="fixed top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-orange-500/15 via-rose-500/10 to-transparent rounded-full blur-3xl pointer-events-none"></div>
+    <div class="fixed bottom-0 left-0 w-[400px] h-[400px] bg-gradient-to-tr from-cyan-500/10 to-transparent rounded-full blur-3xl pointer-events-none"></div>
+
+    <!-- Header / Navbar -->
+    <header class="border-b border-slate-800/80 bg-[#080b11]/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-orange-500 to-rose-500 flex items-center justify-center shadow-lg shadow-orange-500/20 group-hover:scale-105 transition-transform">
+                    <span class="font-black text-white text-lg">K</span>
+                </div>
+                <span class="text-xl font-extrabold tracking-tight text-white">kisodown</span>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-400">
+                <a href="#downloader" class="text-white hover:text-orange-400 transition-colors">Downloader</a>
+                <a href="#features" class="hover:text-orange-400 transition-colors">Features</a>
+                <a href="#faq" class="hover:text-orange-400 transition-colors">FAQ</a>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    API Active
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
+        
+        <!-- Hero Section -->
+        <div id="downloader" class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Left Column: Input & Info -->
+            <div class="lg:col-span-6 space-y-6">
+                
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-bold uppercase tracking-wider">
+                    <span class="w-2 h-2 rounded-full bg-orange-500 animate-ping"></span>
+                    v2.0 Now Live
+                </div>
+
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.1]">
+                    TikTok Caption <br>
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-rose-500 to-pink-500">
+                        In Original Quality.
+                    </span>
+                </h1>
+
+                <p class="text-slate-400 text-base sm:text-lg leading-relaxed max-w-xl">
+                    Fast, secure, and completely anonymous. Extract TikTok captions, hashtags, and video metadata instantly with one click.
+                </p>
+
+                <!-- Form Input -->
+                <div class="bg-[#111622] p-2.5 rounded-2xl border border-slate-800 shadow-2xl focus-within:border-orange-500/50 focus-within:ring-2 focus-within:ring-orange-500/20 transition-all">
+                    <form id="extract-form" class="flex flex-col sm:flex-row items-center gap-2">
+                        <div class="relative w-full flex items-center">
+                            <i class="fa-solid fa-link absolute left-4 text-slate-500"></i>
+                            <input 
+                                type="url" 
+                                id="tiktok-url" 
+                                placeholder="Paste TikTok URL here..." 
+                                required
+                                class="w-full bg-transparent pl-11 pr-24 py-3.5 text-sm sm:text-base text-white placeholder-slate-500 outline-none"
+                            >
+                            <button 
+                                type="button" 
+                                id="btn-paste" 
+                                class="absolute right-2 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 font-semibold transition-colors flex items-center gap-1.5"
+                            >
+                                <i class="fa-regular fa-clipboard"></i>
+                                Paste
+                            </button>
+                        </div>
+                        <button 
+                            type="submit" 
+                            id="btn-submit"
+                            class="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-gradient-to-r from-orange-500 to-rose-600 hover:from-orange-600 hover:to-rose-700 text-white font-bold text-sm shadow-lg shadow-orange-500/25 transition-all flex items-center justify-center gap-2 whitespace-nowrap"
+                        >
+                            <span>Extract Now</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Badges -->
+                <div class="flex flex-wrap items-center gap-6 text-xs font-semibold text-slate-400 pt-2">
+                    <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                        Ready to Fetch
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-bolt text-amber-400"></i>
+                        High Speed
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-lock text-slate-400"></i>
+                        Private & Secure
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right Column: Result / Preview Card -->
+            <div class="lg:col-span-6">
+                <div class="relative">
+                    <div class="absolute -inset-0.5 bg-gradient-to-r from-orange-500/30 to-rose-500/30 rounded-3xl blur-xl opacity-50"></div>
+                    
+                    <div class="relative bg-[#111622] rounded-3xl border border-slate-800 p-6 sm:p-8 space-y-6 shadow-2xl">
+                        
+                        <!-- Header Card -->
+                        <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-black flex items-center justify-center border border-slate-700">
+                                    <i class="fa-brands fa-tiktok text-white text-lg"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-sm font-bold text-white" id="author-nickname">@nickname</h3>
+                                    <p class="text-xs text-slate-400" id="author-id">ID: -</p>
+                                </div>
+                            </div>
+                            <span id="cache-badge" class="px-2.5 py-1 rounded-full bg-slate-800 text-slate-400 text-xs font-medium border border-slate-700">
+                                Standby
+                            </span>
+                        </div>
+
+                        <!-- Caption Container -->
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between text-xs font-semibold text-slate-400">
+                                <span>CAPTION PREVIEW</span>
+                                <span id="published-date" class="text-slate-500">-</span>
+                            </div>
+                            <div class="bg-[#080b11] p-4 rounded-2xl border border-slate-800/80 min-h-[140px] max-h-[220px] overflow-y-auto custom-scrollbar">
+                                <p id="caption-output" class="text-slate-300 text-sm leading-relaxed whitespace-pre-wrap italic">
+                                    Hasil caption akan muncul di sini setelah Anda memasukkan URL TikTok dan mengklik Extract Now.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Hashtags -->
+                        <div class="space-y-2">
+                            <span class="text-xs font-semibold text-slate-400">DETECTED HASHTAGS</span>
+                            <div id="hashtags-container" class="flex flex-wrap gap-1.5 max-h-24 overflow-y-auto">
+                                <span class="text-xs text-slate-500 italic">Belum ada hashtag</span>
+                            </div>
+                        </div>
+
+                        <!-- Copy Buttons -->
+                        <div class="grid grid-cols-2 gap-3 pt-2">
+                            <button id="btn-copy-full" disabled class="px-4 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 disabled:opacity-50 text-white font-semibold text-xs transition-all flex items-center justify-center gap-2">
+                                <i class="fa-regular fa-copy"></i>
+                                Copy Full
+                            </button>
+                            <button id="btn-copy-clean" disabled class="px-4 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 disabled:opacity-50 text-white font-semibold text-xs transition-all flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-align-left"></i>
+                                Copy Clean
+                            </button>
+                        </div>
+
+                        <!-- Metrics Footer -->
+                        <div class="grid grid-cols-2 gap-4 pt-4 border-t border-slate-800">
+                            <div class="bg-[#080b11] p-3 rounded-xl border border-slate-800/60">
+                                <span class="block text-[10px] font-bold uppercase text-slate-500">CHARACTER COUNT</span>
+                                <span id="char-count" class="text-sm font-bold text-slate-200">0</span>
+                            </div>
+                            <div class="bg-[#080b11] p-3 rounded-xl border border-slate-800/60">
+                                <span class="block text-[10px] font-bold uppercase text-slate-500">WORD COUNT</span>
+                                <span id="word-count" class="text-sm font-bold text-slate-200">0</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Section: System Performance Metrics -->
+        <section class="mt-24 pt-16 border-t border-slate-800/80">
+            <div class="text-center max-w-2xl mx-auto mb-12 space-y-2">
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white">System Performance Metrics</h2>
+                <div class="w-12 h-1 bg-gradient-to-r from-orange-500 to-rose-500 mx-auto rounded-full"></div>
+                <p class="text-sm text-slate-400">Real-time usage analytics of our high speed downloader service.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-[#111622] p-6 rounded-2xl border border-slate-800 hover:border-slate-700 transition-all">
+                    <div class="w-10 h-10 rounded-xl bg-orange-500/10 text-orange-400 flex items-center justify-center text-lg font-bold mb-4">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-1">Instant Extraction</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">Direct API response parsing captions in less than 500 milliseconds.</p>
+                </div>
+
+                <div class="bg-[#111622] p-6 rounded-2xl border border-slate-800 hover:border-slate-700 transition-all">
+                    <div class="w-10 h-10 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-lg font-bold mb-4">
+                        <i class="fa-solid fa-hashtag"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-1">Hashtag Separator</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">Automatically identifies, extracts, and separates clean text from hashtags.</p>
+                </div>
+
+                <div class="bg-[#111622] p-6 rounded-2xl border border-slate-800 hover:border-slate-700 transition-all">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-lg font-bold mb-4">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-1">Privacy Preserved</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">No tracking, no logs recorded. Fully client-side processing enabled.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: History -->
+        <section class="mt-16 bg-[#111622] p-6 sm:p-8 rounded-3xl border border-slate-800">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-clock-rotate-left text-orange-400"></i>
+                    Recent Extractions
+                </h3>
+                <button id="btn-clear-history" class="text-xs font-semibold text-rose-400 hover:text-rose-300 transition-colors">
+                    Clear History
+                </button>
+            </div>
+            <div id="history-list" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <p class="text-xs text-slate-500 italic col-span-2">Belum ada riwayat ekstraksi.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-20 border-t border-slate-800 py-8 bg-[#06080d]">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500 space-y-2">
+            <p>&copy; 2026 kisodown. High Performance TikTok Caption Extractor.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2"></div>
+
+    <!-- External Encryptable JS -->
+    <script src="index.js"></script>
+</body>
+</html>
